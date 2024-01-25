@@ -4,7 +4,9 @@ import sys
 
 
 if __name__ == "__main__":
-    code_count = {200: 0, 301: 0, 400: 0, 401: 0, 404: 0, 405: 0, 500: 0}
+    code_count = {
+            200: 0, 301: 0, 400: 0, 401: 0, 403: 0, 404: 0, 405: 0, 500: 0
+            }
     tot_size = [0]
 
     def check_stat(line):

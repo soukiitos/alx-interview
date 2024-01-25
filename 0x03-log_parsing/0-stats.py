@@ -3,36 +3,36 @@
 import sys
 
 
-tot_size = 0
-line_count = 0
-code_count = {
-        200: 0, 301: 0, 400: 0, 401: 0, 404: 0, 405: 0, 500: 0
-        }
+if __name__ == "__main__":
+    code_count = {200: 0, 301: 0, 400: 0, 401: 0, 404: 0, 405: 0, 500: 0}
+    tot_size = [0]
 
-try:
-    for line in sys.stdin:
-        line = line.strip()
-        p_line = line.split()
-        if len(p_line) != 7:
-            continue
+    def check_stat(line):
+        '''Define check_stat'''
         try:
-            f_size = int(p_line[-1])
-            s_code = int(p_line[-2])
+            line = line[:-1]
+            spl_w = line.split(" ")
+            tot_size[0] += int(spl_w[-1])
+            code = int(spl_w[-2])
+            if code in code_count:
+                code_count[code] += 1
         except ValueError:
-            continue
-        tot_size += f_size
-        code_count[s_code] += 1
-        line_count += 1
-        if line_count % 10 == 0:
-            print(f'Total file size: {tot_size}')
-            for i in sorted(code_count.keys()):
-                if code_count[i] > 0:
-                    print(f'{i}: {code_count[i]}')
+            pass
 
-
-except KeyboardInterrupt:
-    '''Handle The Interruption Keyboard'''
-    print(f'Total file size: {tot_size}')
-    for i in sorted(code_count.keys()):
-        if code_count[i] > 0:
-            print(f'{i}: {code_count[i]}')
+    def print_stats():
+        '''Define print_stats'''
+        print("File size: {}".format(tot_size[0]))
+        for i in sorted(code_count.keys()):
+            if code_count[i]:
+                print("{}: {}".format(i, code_count[i]))
+    j = 1
+    try:
+        for line in sys.stdin:
+            check_stat(line)
+            if j % 10 == 0:
+                print_stats()
+            j += 1
+    except KeyboardInterrupt:
+        print_stats()
+        raise
+    print_stats()

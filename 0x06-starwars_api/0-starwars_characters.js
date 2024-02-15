@@ -6,7 +6,7 @@ const movieId = (array, a) => {
   if (a === array.length) return;
   request(array[a], (_error, response, body) => {
     if (_error) {
-      throw error;
+      throw _error;
     } else {
         console.log(JSON.parse(body).name);
         movieId(array, a + 1);

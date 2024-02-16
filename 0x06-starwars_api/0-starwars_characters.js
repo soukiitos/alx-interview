@@ -8,8 +8,8 @@ const movieId = (array, a) => {
     if (_error) {
       throw _error;
     } else {
-        console.log(JSON.parse(body).name);
-        movieId(array, a + 1);
+      console.log(JSON.parse(body).name);
+      movieId(array, a + 1);
     }
   });
 };

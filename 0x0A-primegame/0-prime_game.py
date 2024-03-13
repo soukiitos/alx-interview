@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """Prime Game"""
 
+
 def isWinner(x, nums):
     """Define is winer function"""
     def is_winner_of_game(n):

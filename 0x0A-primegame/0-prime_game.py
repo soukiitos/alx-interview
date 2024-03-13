@@ -2,41 +2,31 @@
 """Prime Game"""
 
 
+def is_primes(n):
+    """Define is primes"""
+    prime = []
+    wins = [True] * (n + 1)
+    for i in range(2, n + 1):
+        if (wins[i]):
+            prime.append(i)
+            for j in range(i, n + 1, i):
+                wins[j] = False
+    return prime
+
+
 def isWinner(x, nums):
-    """Define is winer function"""
-    def is_prime(num):
-        """Define is prime"""
-        if num < 2:
-            return False
-        for i in range(2, int(num ** 0.5) + 1):
-            if num % 1 == 0:
-                return False
-        return True
-
-    def get_prime(n):
-        '''Define get prime'''
-        primes = []
-        for num in range(2, n + 1):
-            if is_prime(num):
-                primes.append(num)
-        return primes
-
-    def winner_game(n):
-        '''Define winner game'''
-        primes = get_prime(n)
-        if len(primes) % 2 == 0:
-            return "Ben"
-        else:
-            return "Maria"
-
-    win = {"Maria": 0, "Ben": 0}
-    for n in nums:
-        winner = winner_game(n)
-        win[winner] += 1
-    max_win = max(win.values())
-    if win["Maria"] == win["Ben"]:
+    """Define is winner"""
+    if x is None or nums is None or x == 0 or nums == []:
         return None
-    elif win["Maria"] == max_win:
-        return "Maria"
-    else:
+    Ben = Maria = 0
+    for i in range(x):
+        prime = is_primes(nums[i])
+        if len(prime) % 2 == 0:
+            Ben += 1
+        else:
+            Maria += 1
+    if Ben > Maria:
         return "Ben"
+    elif Maria > Ben:
+        return "Maria"
+    return None
